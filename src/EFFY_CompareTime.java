@@ -5,8 +5,8 @@ import java.util.Date;
 public class EFFY_CompareTime {
     private SimpleDateFormat formatter;
     private int result;
-    private final int inSeconds = 1000;
-    private final int inMinOrHour = 60; //если понадобится сравнить в минутах или часах
+    private final static String INPUT_PATERN = "dd/MM/yyyy HH:mm:ss";
+    private final int inSeconds = 1000, inMinOrHour = 60;
 
     public EFFY_CompareTime(String format){
         this.formatter = new SimpleDateFormat(format);
@@ -18,8 +18,17 @@ public class EFFY_CompareTime {
             timeFrom.setYear(new Date().getYear());
             timeFrom.setMonth(new Date().getMonth());
             timeFrom.setDate(new Date().getDate());
-            result =(int) (new Date().getTime() - timeFrom.getTime())/inSeconds;
+            result =Math.abs((int) (new Date().getTime() - timeFrom.getTime())/inSeconds);
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public int diffTimeOfDate(String date){
+        try {
+            Date timeFrom = new SimpleDateFormat(INPUT_PATERN).parse(date);
+            result = Math.abs((int) (new Date().getTime()-timeFrom.getTime())/inSeconds);
         } catch (ParseException e) {
             e.printStackTrace();
         }
