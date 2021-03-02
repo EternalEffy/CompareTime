@@ -25,7 +25,7 @@ public class EFFY_CompareTime {
         }
         return result;
     }
-    public int diffTimeOfDate(String date){
+    public int diffTimeAndDate(String date){
         try {
             Date timeFrom = new SimpleDateFormat(INPUT_PATERN).parse(date);
             result = Math.abs((int) (new Date().getTime()-timeFrom.getTime())/inSeconds);
